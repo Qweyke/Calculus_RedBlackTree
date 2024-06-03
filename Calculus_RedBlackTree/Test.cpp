@@ -2,6 +2,7 @@
 
 int main()
 {
+    setlocale(LC_ALL, "Russian");
     RedBlackTree tree;
 
     // ¬ставка случайных уникальных значений

@@ -44,90 +44,63 @@ void RedBlackTree::Insert(int data)
 	}
 }
 
-void RedBlackTree::Balance(Node* broken_node) 
+void RedBlackTree::Balance(Node* broken_node)
 {
-	if (broken_node->parent->color == 'R')
+	while (broken_node != root && broken_node->parent->color == 'R')
 	{
 		Node* dad = broken_node->parent;
+		Node* grand_d = dad->parent;
 
-		if (dad->parent != nullptr)
+		if (grand_d == nullptr) break; // Проверка на nullptr
+
+		if (dad == grand_d->left)
 		{
-			Node* grand_d = dad->parent;
-			if (grand_d->left == dad)
+			Node* uncle = grand_d->right;
+			if (uncle != nullptr && uncle->color == 'R')
 			{
-				if (grand_d->right->color == 'R' && grand_d->right != nullptr)
+				grand_d->color = 'R';
+				uncle->color = 'B';
+				dad->color = 'B';
+				broken_node = grand_d;
+			}
+			else
+			{
+				if (broken_node == dad->left)
 				{
-					grand_d->color = 'R';
-					grand_d->right->color = 'B';
-					dad->color = 'B';
-					Balance(grand_d);
+					LLImbalance(dad);
 				}
-				else if (grand_d->right->color == 'B' && grand_d->right != nullptr)
+				else
 				{
-					if (broken_node == dad->left)
-					{
-						LLImbalance(dad);
-						if (dad->color == 'B')
-						{
-							dad->color = 'R';
-							broken_node->color = 'B';
-							dad->right->color = 'B';
-						}
-						Balance(dad);
-					}
-					else if (broken_node == dad->right)
-					{
-						LRImbalance(broken_node);
-						if (broken_node->color = 'B')
-						{
-							broken_node->color = 'R';
-							broken_node->left->color = 'B';
-							broken_node->right->color = 'B';
-						}
-						Balance(broken_node);
-					}						
+					LRImbalance(broken_node);
 				}
 			}
-			else if (grand_d->right == dad) 
+		}
+		else
+		{
+			Node* uncle = grand_d->left;
+			if (uncle != nullptr && uncle->color == 'R')
 			{
-				if (grand_d->left->color == 'R' && grand_d->left != nullptr)
+				grand_d->color = 'R';
+				uncle->color = 'B';
+				dad->color = 'B';
+				broken_node = grand_d;
+			}
+			else
+			{
+				if (broken_node == dad->right)
 				{
-					grand_d->color = 'R';
-					grand_d->left->color = 'B';
-					dad->color = 'B';
-					Balance(grand_d);
+					RRImbalance(dad);
 				}
-				else if (grand_d->left->color == 'B' && grand_d->left != nullptr)
+				else
 				{
-					if (broken_node == dad->right)
-					{
-						RRImbalance(dad);
-						if (dad->color = 'B')
-						{
-							dad->color = 'R';
-							broken_node->color = 'B';
-							dad->right->color = 'B';
-						}
-						Balance(dad);
-					}
-					else if (broken_node == dad->left)
-					{
-						LRImbalance(broken_node);
-						if (broken_node->color = 'B')
-						{
-							broken_node->color = 'R';
-							broken_node->left->color = 'B';
-							broken_node->right->color = 'B';
-						}
-						Balance(broken_node);
-					}
+					RLImbalance(broken_node);
 				}
 			}
-			
 		}
 	}
 	root->color = 'B';
 }
+
 
 void RedBlackTree::LLImbalance(Node* pull) // LEFT-LEFT imbalance
 {

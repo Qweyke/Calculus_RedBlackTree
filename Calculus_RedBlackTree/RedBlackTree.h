@@ -3,6 +3,7 @@
 #include <set>
 #include <random>
 #include <iomanip>
+#include <locale>
 class RedBlackTree
 {
 	class Node 
