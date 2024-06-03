@@ -1,4 +1,4 @@
-#include "RedBlackTree.h"
+п»ї#include "RedBlackTree.h"
 
 
 RedBlackTree::Node::Node() : color('B'), data(0), parent(nullptr), left(nullptr), right(nullptr) {}
@@ -51,7 +51,7 @@ void RedBlackTree::Balance(Node* broken_node)
 		Node* dad = broken_node->parent;
 		Node* grand_d = dad->parent;
 
-		if (grand_d == nullptr) break; // Проверка на nullptr
+		if (grand_d == nullptr) break; // РџСЂРѕРІРµСЂРєР° РЅР° nullptr
 
 		if (dad == grand_d->left)
 		{
@@ -104,40 +104,40 @@ void RedBlackTree::Balance(Node* broken_node)
 
 void RedBlackTree::LLImbalance(Node* pull) // LEFT-LEFT imbalance
 {
-	Node* ex_dad = pull->parent; // бывший папа (А), будет поменян местом
-	ex_dad->left = pull->right; // меняем левый узел бывшего папы(А) на правый узел его сына (B)
+	Node* ex_dad = pull->parent; // Р±С‹РІС€РёР№ РїР°РїР° (Рђ), Р±СѓРґРµС‚ РїРѕРјРµРЅСЏРЅ РјРµСЃС‚РѕРј
+	ex_dad->left = pull->right; // РјРµРЅСЏРµРј Р»РµРІС‹Р№ СѓР·РµР» Р±С‹РІС€РµРіРѕ РїР°РїС‹(Рђ) РЅР° РїСЂР°РІС‹Р№ СѓР·РµР» РµРіРѕ СЃС‹РЅР° (B)
 	
-	if (ex_dad->left != nullptr) ex_dad->left->parent = ex_dad; // проверяем перешедший узел на пустоту, перестраиваем связь в ином случае
+	if (ex_dad->left != nullptr) ex_dad->left->parent = ex_dad; // РїСЂРѕРІРµСЂСЏРµРј РїРµСЂРµС€РµРґС€РёР№ СѓР·РµР» РЅР° РїСѓСЃС‚РѕС‚Сѓ, РїРµСЂРµСЃС‚СЂР°РёРІР°РµРј СЃРІСЏР·СЊ РІ РёРЅРѕРј СЃР»СѓС‡Р°Рµ
 	
-	pull->parent = ex_dad->parent; // связываем pull и родителя ex_dad 
+	pull->parent = ex_dad->parent; // СЃРІСЏР·С‹РІР°РµРј pull Рё СЂРѕРґРёС‚РµР»СЏ ex_dad 
 	if (ex_dad->parent == nullptr) root = pull;
 	else if (ex_dad == ex_dad->parent->left) ex_dad->parent->left = pull;
 	else if (ex_dad == ex_dad->parent->right) ex_dad->parent->right = pull;
 	
-	ex_dad->parent = pull; 	// смена связи ex_dad и pull 
+	ex_dad->parent = pull; 	// СЃРјРµРЅР° СЃРІСЏР·Рё ex_dad Рё pull 
 	pull->right = ex_dad;
 
-	pull->color = ex_dad->color; // обмен цветами
+	pull->color = ex_dad->color; // РѕР±РјРµРЅ С†РІРµС‚Р°РјРё
 	ex_dad->color = 'R';
 	
 }
 
 void RedBlackTree::RRImbalance(Node* pull) // RIGHT-RIGHT imbalance
 {
-	Node* ex_dad = pull->parent; // бывший папа (А), будет поменян местом
-	ex_dad->right = pull->left; // меняем правый узел бывшего папы(А) на левый узел его сына (B)
+	Node* ex_dad = pull->parent; // Р±С‹РІС€РёР№ РїР°РїР° (Рђ), Р±СѓРґРµС‚ РїРѕРјРµРЅСЏРЅ РјРµСЃС‚РѕРј
+	ex_dad->right = pull->left; // РјРµРЅСЏРµРј РїСЂР°РІС‹Р№ СѓР·РµР» Р±С‹РІС€РµРіРѕ РїР°РїС‹(Рђ) РЅР° Р»РµРІС‹Р№ СѓР·РµР» РµРіРѕ СЃС‹РЅР° (B)
 
-	if (ex_dad->right != nullptr) ex_dad->right->parent = ex_dad; // проверяем перешедший узел на пустоту, перестраиваем связь в ином случае
+	if (ex_dad->right != nullptr) ex_dad->right->parent = ex_dad; // РїСЂРѕРІРµСЂСЏРµРј РїРµСЂРµС€РµРґС€РёР№ СѓР·РµР» РЅР° РїСѓСЃС‚РѕС‚Сѓ, РїРµСЂРµСЃС‚СЂР°РёРІР°РµРј СЃРІСЏР·СЊ РІ РёРЅРѕРј СЃР»СѓС‡Р°Рµ
 	
-	pull->parent = ex_dad->parent; // связываем pull и родителя ex_dad 
+	pull->parent = ex_dad->parent; // СЃРІСЏР·С‹РІР°РµРј pull Рё СЂРѕРґРёС‚РµР»СЏ ex_dad 
 	if (ex_dad->parent == nullptr) root = pull;
 	else if (ex_dad == ex_dad->parent->left) ex_dad->parent->left = pull;
 	else if (ex_dad == ex_dad->parent->right) ex_dad->parent->right = pull;
 
-	ex_dad->parent = pull; // смена связи ex_dad и pull 
+	ex_dad->parent = pull; // СЃРјРµРЅР° СЃРІСЏР·Рё ex_dad Рё pull 
 	pull->left = ex_dad;
 
-	pull->color = ex_dad->color; // обмен цветами
+	pull->color = ex_dad->color; // РѕР±РјРµРЅ С†РІРµС‚Р°РјРё
 	ex_dad->color = 'R';
 }
 
@@ -209,35 +209,45 @@ void RedBlackTree::InsertRandom(int count, int min, int max)
 	}
 }
 
-// Отображение дерева
+// РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РґРµСЂРµРІР°
 void RedBlackTree::DisplayTree()
 {
-	DisplayTreeHelper(root, 0);
+	if (root == nullptr)
+	{
+		std::cout << "Р”РµСЂРµРІРѕ РїСѓСЃС‚РѕРµ" << std::endl;
+		return;
+	}
+	DisplayTreeHelper(root);
 }
 
-void RedBlackTree::DisplayTreeHelper(Node* node, int indent)
+void RedBlackTree::DisplayTreeHelper(Node* node)
 {
 	if (node != nullptr)
 	{
-		if (node->right)
+		std::cout << "РЈР·РµР»: " << node->data << " (" << node->color << ")";
+		if (node->left != nullptr)
 		{
-			DisplayTreeHelper(node->right, indent + 4);
+			std::cout << ", Р›РµРІС‹Р№ РїРѕС‚РѕРјРѕРє: " << node->left->data << " (" << node->left->color << ")";
 		}
-		if (indent)
+		else
 		{
-			std::cout << std::setw(indent) << ' ';
+			std::cout << ", Р›РµРІС‹Р№ РїРѕС‚РѕРјРѕРє: null";
 		}
-		if (node->right) std::cout << " /\n" << std::setw(indent) << ' ';
-		std::cout << node->data << "(" << node->color << ")" << "\n ";
-		if (node->left)
+		if (node->right != nullptr)
 		{
-			std::cout << std::setw(indent) << ' ' << " \\\n";
-			DisplayTreeHelper(node->left, indent + 4);
+			std::cout << ", РџСЂР°РІС‹Р№ РїРѕС‚РѕРјРѕРє: " << node->right->data << " (" << node->right->color << ")";
 		}
+		else
+		{
+			std::cout << ", РџСЂР°РІС‹Р№ РїРѕС‚РѕРјРѕРє: null";
+		}
+		std::cout << std::endl;
+		DisplayTreeHelper(node->left);
+		DisplayTreeHelper(node->right);
 	}
 }
 
-// Получение глубины дерева
+// РџРѕР»СѓС‡РµРЅРёРµ РіР»СѓР±РёРЅС‹ РґРµСЂРµРІР°
 int RedBlackTree::GetDepth()
 {
 	return GetDepthHelper(root);

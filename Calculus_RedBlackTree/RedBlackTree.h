@@ -22,7 +22,7 @@ class RedBlackTree
 private:
 	Node* root;
 	int deep;
-	void DisplayTreeHelper(Node* node, int indent);
+	void DisplayTreeHelper(Node* node);
 	int GetDepthHelper(Node* node);
 public:
 	RedBlackTree();
